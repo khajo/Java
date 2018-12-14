@@ -7,29 +7,39 @@ import java.util.Optional;
 public class Card {
 
 
-    private List<CreditCard> cards = Arrays.asList(new MasterCard(), new Visa(), new AmericanExpress());
-
-    public Optional<List<CreditCard>> getCards () {
-        return Optional.of(cards);
+    public void display(Long number) {
+        String cradName = getCard(number);
+        check(cradName);
     }
 
     public String getCard(Long number) {
+        List<CreditCard> cards = Creditcards.getCards();
         String creditCard = "";
         for (CreditCard card : cards) {
             Integer spacialNumber = getSpacialNumber(number);
             Integer lenght = getLenght(number);
             if (card.checkIsValue(lenght, spacialNumber)) {
-                 creditCard = card.getName();
+                creditCard = card.getName();
                 return creditCard;
-            }else {
-                creditCard = " Creditcard is Invalid";
-
             }
         }
 
         return creditCard;
     }
-    public  Optional<CreditCard> get(String name) {
+
+
+    private void check(String name) {
+
+        Optional<CreditCard> cards = getOpitional(name);
+        if (cards.isPresent()) {
+            System.out.println("The card is " + cards.get().getName());
+        } else
+            System.out.println(name + " card is Invalid");
+    }
+
+    public Optional<CreditCard> getOpitional(String name) {
+        List<CreditCard> cards = Creditcards.getCards();
+
         for (CreditCard card : cards) {
             if (card.getName().equalsIgnoreCase(name)) {
                 return Optional.of(card);
@@ -38,31 +48,7 @@ public class Card {
         return Optional.empty();
     }
 
-    //
-//    public Integer getSpacialNumber(Long numbers) {
-//        String number = numbers.toString(numbers);
-//        List<String> nums = getSplintList(number);
-//
-//        String numEmpty = "";
-//        Integer spacialNumber ;
-//        for (int i = 0; i < 2; i++) {
-//            String numString = nums.get(i);
-//            Integer numIntager = Integer.valueOf(numString);
-//            if (numIntager == 4) {
-//                Integer spacialNumber4 = 4;
-//                return spacialNumber=spacialNumber4;
-//
-//            } else {
-//                String numString2 = numIntager.toString(numIntager);
-//
-//                numEmpty = numEmpty + numString2;
-//                Integer spacialNumber1 = Integer.valueOf(numEmpty);
-//                return spacialNumber=spacialNumber1;
-//
-//            }
-//        }
-//        return spacialNumber;
-//    }
+
     public Integer getSpacialNumber(Long number) {
 
         String numberString = number.toString(number);

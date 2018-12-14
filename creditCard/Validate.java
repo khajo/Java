@@ -7,8 +7,10 @@ import java.util.List;
 
 public class Validate {
 
-    public Boolean iSCheckValidate(Integer number) {
-        return number % 10 == 0;
+    public Boolean iSCheckValidate(Long number) {
+
+        Integer num = getSum(number);
+        return num % 10 == 0;
     }
 
     public Integer getSum(Long cardNumber) {
@@ -20,7 +22,7 @@ public class Validate {
         List<String> oddNumbers = getOddList(allNumbers);
         Integer sumEven = getEvenSum(evenNumbers);
         Integer sumOdd = getOddSum(oddNumbers);
-        return  sumEven +sumOdd ;
+        return sumEven + sumOdd;
     }
 
     public Integer getEvenSum(List<String> oddNumbers) {
